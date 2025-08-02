@@ -63,3 +63,14 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development, :test do
+  gem 'rspec-rails'        # Framework de testing
+  gem 'factory_bot_rails'  # Para crear datos de prueba
+  gem 'pry-rails'         # Debugger mejorado
+end
+
+group :test do
+  gem 'capybara'          # Para tests de interfaz
+  gem 'selenium-webdriver' # Para tests con JavaScript
+end
