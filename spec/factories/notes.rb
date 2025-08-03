@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :note do
-    title { "MyString" }
-    content { "MyText" }
+    title { "Sample Note" }
+    content { "# Hello World\n\nThis is a **test** note." }
   end
 end
