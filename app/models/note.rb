@@ -5,8 +5,8 @@ class Note < ApplicationRecord
   
  # Scope for searching
   scope :search, ->(query) {
-    where("title ILIKE ? OR content ILIKE ?", "%#{query}%", "%#{query}%") if query.present?
-  }
+    where("title LIKE ? OR content LIKE ?", "%#{query}%", "%#{query}%") if query.present?
+}
 
   # Method for showing a preview
   def preview(length = 150)
