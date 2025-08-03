@@ -1,6 +1,7 @@
 <h1 class="text-2xl font-bold mb-6">Edit Note</h1>
 
-<%= form_with model: @note, class: "space-y-4" do |f| %>
+<%= form_with model: @note, data: { controller: "markdown-preview" }, class: "space-y-4" do |f| %>
+  
   <% if @note.errors.any? %>
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
       <% @note.errors.full_messages.each do |msg| %>
@@ -14,14 +15,31 @@
     <%= f.text_field :title, class: "w-full px-3 py-2 border rounded" %>
   </div>
 
-  <div>
-    <%= f.label :content, class: "block font-bold mb-2" %>
-    <%= f.text_area :content, rows: 10, 
-        class: "w-full px-3 py-2 border rounded font-mono" %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Editor -->
+    <div>
+      <%= f.label :content, "Markdown Content", class: "block font-bold mb-2" %>
+      <%= f.text_area :content, 
+          rows: 15,
+          data: { 
+            markdown_preview_target: "input", 
+            action: "input->markdown-preview#updatePreview" 
+          },
+          class: "w-full px-3 py-2 border rounded font-mono text-sm" %>
+    </div>
+    
+    <!-- Preview -->
+    <div>
+      <label class="block font-bold mb-2">Live Preview</label>
+      <div data-markdown-preview-target="preview" 
+           class="w-full h-80 overflow-y-auto border rounded p-3 bg-gray-50">
+        Preview aparecerá aquí...
+      </div>
+    </div>
   </div>
 
   <div class="flex space-x-2">
     <%= link_to "Cancel", @note, class: "px-4 py-2 bg-gray-500 text-white rounded" %>
-    <%= f.submit class: "px-4 py-2 bg-blue-500 text-white rounded" %>
+    <%= f.submit "Update Note", class: "px-4 py-2 bg-blue-500 text-white rounded" %>
   </div>
 <% end %>
