@@ -10,7 +10,7 @@ class Note < ApplicationRecord
 
   # Method for showing a preview
   def preview(length = 150)
-    # Remove character of markdown and trunkate
-    content.gsub(/[#*`_\[\]()]/, '').truncate(length)
+    # Remove character of markdown and extra spaces and truncate
+    content.gsub(/[#*`_\[\]()]/, '').strip.truncate(length)
   end
 end
